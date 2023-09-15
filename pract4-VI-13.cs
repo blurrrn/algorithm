@@ -1,17 +1,20 @@
 //13. найти старшую цифру
 using System;
-class Program
+namespace aboba
 {
-    static void Main()
+    class Program
     {
-        int ans = 0, N;
-        Console.Write("Введите N: ");
-        N = int.Parse(Console.ReadLine());
-        while (N != 0)
+        static void Main()
         {
-            ans = N;
-            N /= 10;
+            int ans = 0, N;
+            Console.Write("Введите N: ");
+            N = int.Parse(Console.ReadLine());
+            while (N != 0)
+            {
+                ans = N;
+                N /= 10;
+            }
+            Console.WriteLine($"Старшая цифра: {ans}");
         }
-        Console.WriteLine($"Старшая цифра: {ans}");
     }
 }
