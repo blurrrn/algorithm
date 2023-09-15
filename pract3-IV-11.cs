@@ -6,16 +6,17 @@ class Program
     {
         int A, B;
         Console.Write("Введите A: ");
-        A =int.Parse(Console.ReadLine());
+        A = int.Parse(Console.ReadLine());
         Console.Write("Введите B: ");
         B = int.Parse(Console.ReadLine());
         while (A % 5 != 0)
         {
             A++;
         }
-        for (int x = A; x <= B; x+=5)
+        Console.WriteLine("Числа, кратные 5 из диапазона [A,B]:");
+        for (int x = A; x <= B; x += 5)
         {
-            Console.WriteLine("{0} ",x);
+            Console.Write("{0} ", x);
         }
     }
 }
