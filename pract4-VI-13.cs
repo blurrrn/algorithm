@@ -6,7 +6,6 @@ namespace aboba
     {
         static void Main()
         {
-            int ans = 0;
             string N;
             Console.Write("Введите N: ");
             N = Console.ReadLine();
