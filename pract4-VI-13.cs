@@ -6,15 +6,11 @@ namespace aboba
     {
         static void Main()
         {
-            int ans = 0, N;
+            int ans = 0;
+            string N;
             Console.Write("Введите N: ");
-            N = int.Parse(Console.ReadLine());
-            while (N != 0)
-            {
-                ans = N;
-                N /= 10;
-            }
-            Console.WriteLine($"Старшая цифра: {ans}");
+            N = Console.ReadLine();
+            Console.WriteLine($"Старшая цифра: {N[0]}");
         }
     }
 }
