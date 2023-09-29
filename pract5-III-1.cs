@@ -12,8 +12,8 @@ public class Program
             return 2;
         else
         {
-            int bnm1 = b(n - 1);
-            int bnm2 = b(n - 2);
+            int bnm1 = b(n - 2);
+            int bnm2 = b(n - 1);
             return Math.Abs(bnm1) - 6 * bnm2;
         }
 
