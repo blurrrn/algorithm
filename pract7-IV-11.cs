@@ -18,6 +18,13 @@ class Program
             }
         }
 
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+                Console.Write(String.Format("{0,3}", A[i, j]));
+            Console.WriteLine();
+        }
+
         int[] B = new int[n];
 
         for (int i = 0; i < n; i++)
@@ -36,7 +43,7 @@ class Program
         Console.WriteLine("Последние четные элементы в каждой строке:");
         for (int i = 0; i < n; i++)
         {
-            Console.WriteLine(B[i]);
+            Console.Write($"{B[i]} ");
         }
     }
 }
