@@ -29,21 +29,26 @@ class Program
 
         for (int i = 0; i < n; i++)
         {
-            int even = 0;
-            for (int j = 0; j < n; j++)
+            B[i] = -1;
+            for (int j = n-1; j >= 0; j--)
             {
                 if (A[i, j] % 2 == 0)
                 {
-                    even = A[i, j];
+                    B[i] = A[i, j];
+                    break;
                 }
             }
-            B[i] = even;
+            //B[i] = even;
         }
 
         Console.WriteLine("Последние четные элементы в каждой строке:");
         for (int i = 0; i < n; i++)
         {
-            Console.Write($"{B[i]} ");
+            if (B[i] != -1)
+            {
+                Console.Write($"{B[i]} ");
+            }
+            //Console.Write($"{B[i]} ");
         }
     }
 }
