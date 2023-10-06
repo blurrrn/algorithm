@@ -5,23 +5,36 @@ class Program
 {
     static void Main(string[] args)
     {
+        Console.Write("Введите строку: ");
         string message = Console.ReadLine();
         char[] separators = { ' ', ',', '.', '!', '?' };
         string[] words = message.Split(separators, StringSplitOptions.RemoveEmptyEntries);
         List<string> Max = new List<string>();
-        string longestWord = "";
+        int longestWord = 0;
         foreach (string word in words)
         {
-            if (word.Length > longestWord.Length)
+            if (word.Length > longestWord)
             {
-                longestWord = word;
+                longestWord = word.Length;
                 Max.Clear();
+                Max.Add(word);
             }
-            else if (word.Length == longestWord.Length)
+            else if (word.Length == longestWord)
             {
                 Max.Add(word);
             }
         }
-        Console.WriteLine("Самое длинное слово: " + longestWord);
+        //foreach (string word in words)
+        //{
+        //    if (word.Length < longestWord.Length)
+        //    {
+        //        Max.Remove(word);
+        //    }
+        //}
+        Console.WriteLine("Самые длинные слова:");
+        foreach (string str in Max)
+        {
+            Console.WriteLine(str);
+        }
     }
 }
