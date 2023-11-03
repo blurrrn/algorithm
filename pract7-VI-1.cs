@@ -4,14 +4,14 @@ class Program
     static void InputArray(out int[][] a, int n, out int min_elem)
     {
         min_elem = 1000000;
-        a = new int[n+1][];
+        a = new int[n + 1][];
         for (int i = 0; i < n; i++) { a[i] = new int[n]; }
 
         for (int i = 0; i < n; i++)
         {
             for (int j = 0; j < n; j++)
             {
-                a[i][j] = Convert.ToInt32((Console.ReadLine()));
+                a[i][j] = int.Parse((Console.ReadLine()));
                 min_elem = Math.Min(min_elem, a[i][j]);
             }
         }
@@ -39,10 +39,10 @@ class Program
     {
         Console.Write($"Введите n = ");
         int min_elem;
-        int n = Convert.ToInt32(Console.ReadLine());
-        int k = n;
+        int n = int.Parse(Console.ReadLine());
+        //int k = n;
         int[][] a;
-        int[] zeros = new int[n];
+        //int[] zeros = new int[n];
         Console.Write("Вводите массив по строчкам \n");
         InputArray(out a, n, out min_elem);
         Console.WriteLine("Массив:");
