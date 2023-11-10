@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
+using System.Collections.Generic;
 class Program
 {
     struct Spoint
@@ -113,7 +114,7 @@ class Program
                         p.PrintCoords();
                         c++;
                     }
-                    
+
                 }
                 else
                 {
