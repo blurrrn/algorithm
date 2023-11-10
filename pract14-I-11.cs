@@ -1,69 +1,127 @@
 using System;
-
-public struct SPoint
+using System.IO;
+using System.Runtime.ConstrainedExecution;
+using System.Text;
+class Program
 {
-    public double X;
-    public double Y;
-
-    public SPoint(double x, double y)
+    struct Spoint
     {
-        X = x;
-        Y = y;
-    }
-}
-
-public static class KRUG
-{
-    public static SPoint FindCenter(SPoint[] points, double R)
-    {
-        int minPoints = 9999;
-        SPoint minPoint = new SPoint();
-
-        // Перебираем все точки
-        for (int i = 0; i < points.Length; i++)
+        public double x, y;
+        public Spoint(double x, double y)
         {
-            int pointsInCircle = 0;
-
-            // Подсчитываем количество точек, входящих в окружность с центром в текущей точке
-            for (int j = 0; j < points.Length; j++)
-            {
-                if (i == j)
-                    continue;
-
-                double distance = Math.Sqrt(Math.Pow(points[i].X - points[j].X, 2) + Math.Pow(points[i].Y - points[j].Y, 2));
-                if (distance <= R)
-                    pointsInCircle++;
-            }
-
-            // Если текущая точка имеет меньшее количество точек в окружности, обновляем минимальное значение
-            if (pointsInCircle < minPoints)
-            {
-                minPoints = pointsInCircle;
-                minPoint = points[i];
-            }
+            this.x = x;
+            this.y = y;
+        }
+        public Spoint(List<double> Coords)
+        {
+            this.x = Coords[0];
+            this.y = Coords[1];
         }
 
-        return minPoint;
-    }
-}
-
-public class Program
-{
-    public static void Main(string[] args)
-    {
-        SPoint[] points = new SPoint[]
+        public string PrintPoint()
         {
-            new SPoint(1, 1),
-            new SPoint(2, 3),
-            new SPoint(4, 2),
-            new SPoint(5, 6),
-            new SPoint(7, 1)
-        };
+            return ($"({this.x}, {this.y})\n");
+        }
+    }
+    static List<double> GetCoords(string line)
+    {
+        string[] numbers = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        List<double> ans = new List<double>();
+        for (int i = 0; i < 2; i++)
+        {
+            ans.Add(Convert.ToDouble(numbers[i]));
+        }
+        return ans;
+    }
+    static bool InCircle(Spoint point, Spoint centre, double R)
+    {
+        if ((point.x - centre.x) * (point.x - centre.x) + (point.y - centre.y) * (point.y - centre.y) <= R * R)
+        {
+            return true;
+        }
+        return false;
+    }
+    struct PointCountsPair
+    {
+        public Spoint centre;
+        public int count;
+        public PointCountsPair(Spoint centre, int count)
+        {
+            this.centre = centre;
+            this.count = count;
+        }
+        public void PrintCoords()
+        {
+            Console.WriteLine($"({this.centre.x}, {this.centre.y}), вокруг {this.count} точек");
+        }
+    }
+    static void Main()
+    {
+        string inputFile = "input1z.txt";
+        string outputFile = "output1z.txt";
+        using (StreamReader reader = new StreamReader(inputFile))
+        {
+            using (StreamWriter writer = new StreamWriter(outputFile, false))
+            {
+                string line;
+                int PointsCount = 0;
+                double R = Convert.ToDouble(reader.ReadLine());
+                Stack<PointCountsPair> pcp = new Stack<PointCountsPair>();
+                List<Spoint> points = new List<Spoint>();
+                while ((line = reader.ReadLine()) != null)
+                {
+                    points.Add(new Spoint(GetCoords(line)));
+                }
+                for (int i = 0; i < points.Count; i++)
+                {
+                    PointsCount = 0;
+                    Spoint Centre = points[i];
+                    for (int j = 0; j < points.Count; j++)
+                    {
+                        if (i != j)
+                        {
+                            if (InCircle(points[j], Centre, R))
+                            {
+                                PointsCount++;
+                            }
+                        }
+                    }
+                    if (pcp.Count > 0)
+                    {
+                        if (PointsCount < pcp.Peek().count)
+                        {
+                            pcp.Clear();
+                            pcp.Push(new PointCountsPair(Centre, PointsCount));
+                        }
+                        else if (PointsCount == pcp.Peek().count)
+                        {
+                            pcp.Push(new PointCountsPair(Centre, PointsCount));
+                        }
+                    }
+                    else
+                    {
+                        pcp.Push(new PointCountsPair(Centre, PointsCount));
+                    }
+                }
+                if (pcp.Count > 0)
+                {
+                    Console.WriteLine($"Радиус: {R}");
+                    int c = 1;
+                    foreach (var p in pcp)
+                    {
+                        Console.WriteLine($"Окружность #{c}");
+                        p.PrintCoords();
+                        c++;
+                    }
+                    
+                }
+                else
+                {
+                    Console.WriteLine("Точки не найдены");
+                }
+            }
 
-        double R = 3;
+        }
 
-        SPoint minPoint = KRUG.FindCenter(points, R);
-
-        Console.WriteLine($"Центр окружности с минимальным числом точек: ({minPoint.X}, {minPoint.Y})");
     }
 }
