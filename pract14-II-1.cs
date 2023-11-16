@@ -3,16 +3,16 @@ using System.IO;
 using System.Text;
 class Structures
 {
-// Создаем структуру Student
-public struct Student : IComparable<Student>
-{
-    // Поля структуры
-    public string LastName;
-    public string FirstName;
-    public string MiddleName;
-    public int BirthYear;
-    public string Address;
-    public string School;
+    // Создаем структуру Student
+    public struct Student : IComparable<Student>
+    {
+        // Поля структуры
+        public string LastName;
+        public string FirstName;
+        public string MiddleName;
+        public int BirthYear;
+        public string Address;
+        public string School;
         // Конструктор, принимающий входные данные через запятую
         public Student(string lastName, string firstName, string middleName, int birthYear, string address, string school)
         {
@@ -41,28 +41,32 @@ public struct Student : IComparable<Student>
         }
         // Метод для сравнения студентов на основе года рождения
         public int CompareTo(Student other)
-    {
-        return this.BirthYear.CompareTo(other.BirthYear);
-    }
-static void Main()
-    {
-        string input_path = "C:\\education\\reshetki_kudrina\\test_prj\\pr14\\input1.txt";
-        string output_path = "C:\\education\\reshetki_kudrina\\test_prj\\pr14\\output1.txt";
-        using (StreamReader reader = new StreamReader(input_path))
         {
-            using (StreamWriter writer = new StreamWriter(output_path, false))
+            return this.BirthYear.CompareTo(other.BirthYear);
+        }
+        static void Main()
+        {
+            string input_path = "input.txt";
+            string output_path = "output.txt";
+            using (StreamReader reader = new StreamReader(input_path))
             {
-                List<Student> StudentsList = new List<Student>();
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                using (StreamWriter writer = new StreamWriter(output_path, false))
                 {
-                    StudentsList.Add(new Student(line));
-                }
-                StudentsList.Sort();
-                foreach (Student student in StudentsList)
+                    List<Student> StudentsList = new List<Student>();
+                    string line;
+                    Console.Write("Введите школу: ");
+                    string school = Console.ReadLine();
+                    while ((line = reader.ReadLine()) != null)
                     {
-                        writer.WriteLine(student.GetStudentData());
+                        StudentsList.Add(new Student(line));
                     }
+                    StudentsList.Sort();
+                    foreach (Student student in StudentsList)
+                    {
+                        if (student.School == school)
+                            writer.WriteLine(student.GetStudentData());
+                    }
+                }
             }
         }
     }
