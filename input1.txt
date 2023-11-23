@@ -1,0 +1,7 @@
+Гитара 8500 MusicBand 60
+Флейта 4200 ClassicMuse 45
+Скрипка 6900 ClassicMuse 52
+Синтезатор 11900 MusicBand 30
+Барабан 7500 MusicBand 48
+Виолончель 9800 ClassicMuse 22
+Тромбон 5200 ClassicMuse 34
