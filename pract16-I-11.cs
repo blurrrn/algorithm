@@ -17,12 +17,12 @@ namespace chisla
             {
                 Numbers.Add(int.Parse(number));
             }
-            var SortedNumbers = Numbers.Where(n => (n >= 10 && n <= 99));
+            var SortedNumbers = Numbers.Where(n => (n >= 10 && n <= 99)).Select(n => -n);
             string path_output = "output.txt";
             using (StreamWriter fout = new StreamWriter(path_output, false))
             {
                 foreach (var n in SortedNumbers)
-                    fout.Write($"{-n} ");
+                    fout.Write($"{n} ");
             }
         }
     }
