@@ -57,9 +57,9 @@ class Structures
                     {
                         TovarList.Add(new Tovar(line));
                     }
-                    var sortedTov1 = TovarList.Where(t => t.Amount < k);
-                    var sortedTov2 = sortedTov1.OrderBy(t => t.Amount);
-                    foreach (var t in sortedTov2)
+                    var sortedTov1 = TovarList.Where(t => t.Amount < k).OrderBy(t => t.Amount);
+                    //var sortedTov2 = sortedTov1.OrderBy(t => t.Amount);
+                    foreach (var t in sortedTov1)
                         writer.WriteLine(t.GetTovarData());
 
                 }
