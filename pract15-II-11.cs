@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
+using System.Linq;
 class Structures
 {
     // Создаем структуру Tovar
