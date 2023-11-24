@@ -60,12 +60,9 @@ class Structures
                     var sortedTov1 =
                         from t in TovarList
                         where t.Amount < k
-                        select t;
-                    var sortedTov2 =
-                        from t in sortedTov1
                         orderby t.Amount
                         select t;
-                    foreach (var t in sortedTov2)
+                    foreach (var t in sortedTov1)
                         writer.WriteLine(t.GetTovarData());
 
                 }
