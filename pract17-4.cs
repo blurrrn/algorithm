@@ -1,3 +1,4 @@
+using System;
 class pract
 {
     class Money
