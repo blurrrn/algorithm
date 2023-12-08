@@ -113,6 +113,8 @@ class pract
         Money money2 = new Money(100, 2);
         money1.PrintInfo();
         money2.PrintInfo();
+        Console.WriteLine("Обращение по индексам:");
+        Console.WriteLine($"money1[0] = {money1[0]}, money1[1] = {money1[1]}\nmoney2[0] = {money2[0]}, money2[1] = {money2[1]}\n");
         Console.WriteLine("Проверка после убавления второго экземпляра:");
         money2--;
         money2.PrintInfo();
@@ -144,6 +146,5 @@ class pract
         money2.PrintInfo();
         Console.WriteLine("Проверка на !0:");
         Console.WriteLine(!money2);
-        Console.WriteLine($"money2[0] = {money2[0]}, money2[1] = {money2[1]}\nmoney1[0] = {money1[0]}, money1[1] = {money1[1]}");
     }
 }
