@@ -1,5 +1,6 @@
 using System;
-class pract
+
+namespace Hello
 {
     class Money
     {
@@ -81,16 +82,29 @@ class pract
             }
 
         }
+        public Money(Money other) //копирование
+        {
+            this.Fisrt = other.Fisrt;
+            this.Second = other.Second;
+        }
         public static Money operator ++(Money cash)
         {
-            cash.Fisrt++;
-            cash.Second++;
-            return cash;
+            Money temp = new Money(cash);
+            temp.Fisrt++;
+            temp.Second++;
+            return temp;
         }
         public static Money operator +(Money cash, int number)
         {
-            cash.Second += number;
-            return cash;
+            Money temp = new Money(cash);
+            temp.Second += number;
+            return temp;
+        }
+        public static Money operator +(int number, Money cash)
+        {
+            Money temp = new Money(cash);
+            temp.Second += number;
+            return temp;
         }
         public static bool operator !(Money cash)
         {
@@ -98,53 +112,62 @@ class pract
         }
         public static Money operator --(Money cash)
         {
-            cash.Fisrt--;
-            cash.Second--;
-            return cash;
+            Money temp = new Money(cash);
+            temp.Fisrt--;
+            temp.Second--;
+            return temp;
         }
     }
-    public static void Main()
+    class pract
     {
-        Money money1 = new Money(1, 10);
-        Console.WriteLine("Экземпляр первый:");
-        money1.PrintInfo();
-        money1++;
-        Console.WriteLine("Увеличили первый, задаём второй экземпляр:");
-        Money money2 = new Money(100, 2);
-        money1.PrintInfo();
-        money2.PrintInfo();
-        Console.WriteLine("Обращение по индексам:");
-        Console.WriteLine($"money1[0] = {money1[0]}, money1[1] = {money1[1]}\nmoney2[0] = {money2[0]}, money2[1] = {money2[1]}\n");
-        Console.WriteLine("Проверка после убавления второго экземпляра:");
-        money2--;
-        money2.PrintInfo();
-        Console.WriteLine("Прибавляем количество денег +10 ко второму экземпляру:");
-        money2 += 10;
-        money2.PrintInfo();
-        Console.WriteLine("Сумма второго экземпляра:");
-        Console.WriteLine(money2.Summa);
-        int n = 177;
-        Console.WriteLine($"Проверяем сколько товаров по {n}р можно купить:");
-        Console.WriteLine(money2.CanBuyCount(n));
-        Console.WriteLine("Понижаем номинал:");
-        money2.Fisrt = 1;
-        money2.PrintInfo();
-        Console.WriteLine("Проверка можем ли купить вообще:");
-        Console.WriteLine(money2.CanBuy(n));
-        Console.WriteLine("Повышаем номинал:");
-        money2.Fisrt = 200;
-        money2.PrintInfo();
-        Console.WriteLine("Проверка можем ли купить вообще:");
-        Console.WriteLine(money2.CanBuy(n));
-        Console.WriteLine("Ставим кол-во купюр 0:");
-        money2.Second = 0;
-        money2.PrintInfo();
-        Console.WriteLine("Проверка на !0:");
-        Console.WriteLine(!money2);
-        Console.WriteLine("Ставим кол-во купюр 3:");
-        money2.Second = 3;
-        money2.PrintInfo();
-        Console.WriteLine("Проверка на !0:");
-        Console.WriteLine(!money2);
+        public static void Main()
+        {
+            Money money1 = new Money(1, 10);
+            Console.WriteLine("Экземпляр первый:");
+            money1.PrintInfo();
+            Money x = 1 + money1;
+            money1.Fisrt = 10;
+            money1.PrintInfo();
+            x.PrintInfo();
+            //Console.WriteLine("Увеличиваем первый:");
+            //money1++;
+            //money1.PrintInfo();
+            Console.WriteLine("Задаём второй экземпляр:");
+            Money money2 = new Money(100, 2);
+            money2.PrintInfo();
+            Console.WriteLine("Обращение по индексам:");
+            Console.WriteLine($"money1[0] = {money1[0]}, money1[1] = {money1[1]}\nmoney2[0] = {money2[0]}, money2[1] = {money2[1]}\n");
+            Console.WriteLine("Проверка после убавления второго экземпляра:");
+            money2--;
+            money2.PrintInfo();
+            Console.WriteLine("Прибавляем количество денег +10 ко второму экземпляру:");
+            money2 += 10;
+            money2.PrintInfo();
+            Console.WriteLine("Сумма второго экземпляра:");
+            Console.WriteLine(money2.Summa);
+            int n = 177;
+            Console.WriteLine($"Проверяем сколько товаров по {n}р можно купить:");
+            Console.WriteLine(money2.CanBuyCount(n));
+            Console.WriteLine("Понижаем номинал:");
+            money2.Fisrt = 1;
+            money2.PrintInfo();
+            Console.WriteLine("Проверка можем ли купить вообще:");
+            Console.WriteLine(money2.CanBuy(n));
+            Console.WriteLine("Повышаем номинал:");
+            money2.Fisrt = 200;
+            money2.PrintInfo();
+            Console.WriteLine("Проверка можем ли купить вообще:");
+            Console.WriteLine(money2.CanBuy(n));
+            Console.WriteLine("Ставим кол-во купюр 0:");
+            money2.Second = 0;
+            money2.PrintInfo();
+            Console.WriteLine("Проверка на !0:");
+            Console.WriteLine(!money2);
+            Console.WriteLine("Ставим кол-во купюр 3:");
+            money2.Second = 3;
+            money2.PrintInfo();
+            Console.WriteLine("Проверка на !0:");
+            Console.WriteLine(!money2);
+        }
     }
 }
